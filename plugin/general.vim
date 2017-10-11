@@ -42,8 +42,7 @@ function! s:GitTodo()
 
     normal ggO# Press enter to search for the todo item specified.
 
-    " TODO: Change this to git diff master
-    read !git diff --staged | grep -e ^diff -e ^+
+    read !git diff master | grep -e ^diff -e ^+
 
     let l:filter  = ".!grep -i todo | "
     let l:filter .= "sed -e 's/^.//g' "
