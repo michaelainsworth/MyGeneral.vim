@@ -34,7 +34,7 @@ command! Gc :call <SID>GitCommit()
 " containing 'todo' that have been added since master.
 "
 " This function also maps <cr> to allow you to jump to that file.
-function! s:GitTodo()
+function! s:GitTodo(against)
     tabe
     setlocal buftype=nofile
     setlocal bufhidden=hide
@@ -42,7 +42,10 @@ function! s:GitTodo()
 
     normal ggO# Press enter to search for the todo item specified.
 
-    read !git diff master | grep -e ^diff -e ^+
+    let l:command  = 'read !'
+    let l:command .= 'git diff ' . a:against . ' | '
+    let l:command .= 'grep -e ^diff -e ^+'
+    execute l:command
 
     let l:filter  = ".!grep -i todo | "
     let l:filter .= "sed -e 's/^.//g' "
@@ -54,8 +57,8 @@ function! s:GitTodo()
 
     nnoremap <buffer> <cr> :call <SID>GitTodoFind()<cr>
 endfunction
-command! GitTodo :call <SID>GitTodo()
-command! Gt :call <SID>GitTodo()
+command! -nargs=? GitTodo :call <SID>GitTodo(<args>)
+command! -nargs=? Gt :call <SID>GitTodo(<args>)
 
 " An internal function used by GitTodo.
 function! s:GitTodoFind()
