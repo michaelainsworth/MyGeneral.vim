@@ -50,7 +50,7 @@ function! s:GitTodo(against)
     let l:filter  = ".!grep -i todo | "
     let l:filter .= "sed -e 's/^.//g' "
     let l:filter .= "    -e 's/^\s\+//g' "
-    let l:filter .= "    -e 's/^[*\#\/]\+//g' "
+    let l:filter .= "    -e 's/^[*\\\#\/]\+//g' "
     let l:filter .= "    -e 's/^ \?@\?TODO:\? //gI'"
 
     global /^+/execute l:filter
