@@ -13,12 +13,25 @@
 " Creates a new tab, filled with the contents of `git diff --staged`.
 " 
 " This is useful for working out what you're about to commit.
-function! s:GitDiffStaged()
-    tabe | setfiletype diff | r !git diff --staged
+function! s:GitDiff(against)
+    tabe
+    setlocal filetype=diff
+    setlocal buftype=nofile
+    setlocal bufhidden=hide
+    setlocal noswapfile
+
+    let l:cmd  = '0read !'
+    let l:cmd .= 'git diff '
+    let l:cmd .= shellescape(a:against)
+
+    execute l:cmd
+    normal gg
 endfunction
 
-command! GitDiffStaged :call <SID>GitDiffStaged()
-command! Gds :call <SID>GitDiffStaged()
+command! -nargs=1 GitDiff :call <SID>GitDiff(<args>)
+command! -nargs=1 Gd :call <SID>GitDiff(<args>)
+command! GitDiffStaged :call <SID>GitDiff('--staged')
+command! Gds :call <SID>GitDiff('--staged')
 
 " Writes the current buffer to the command 'git commit', then closes the
 " current buffer.
@@ -93,7 +106,7 @@ function! s:GitFormat()
     normal j
 
     set textwidth=72
-    gqG
+    normal gqG
 
     let &textwidth = l:old_textwidth
 endfunction
