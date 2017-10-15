@@ -114,3 +114,5 @@ endfunction
 command! GitFormat :call <SID>GitFormat()
 command! Gf :call <SID>GitFormat()
 
+" Create a text object representing the last change.
+onoremap <silent> lc :<c-u>normal '[V']<cr>
