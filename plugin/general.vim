@@ -116,3 +116,5 @@ command! Gf :call <SID>GitFormat()
 
 " Create a text object representing the last change.
 onoremap <silent> lc :<c-u>normal '[V']<cr>
+
+vnoremap <leader>s :!sort -u<cr>
