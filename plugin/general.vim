@@ -144,7 +144,7 @@ let g:ycm_server_python_interpreter = '/usr/bin/python2'
 nnoremap <leader>gg :YcmCompleter GoToDefinitionElseDeclaration<cr>
 " ------------------------------------------------------------------------- }}}
 
-" File Management {{{ ---------------------------------------------------------
+" FILE MANAGEMENT {{{ ---------------------------------------------------------
 " TODO: Perhaps this could be replaced with, e.g., nerd tree?
 " Find the file under the current W word.
 function! FindFile()
