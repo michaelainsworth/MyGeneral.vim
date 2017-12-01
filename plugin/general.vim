@@ -142,6 +142,14 @@ let g:ycm_server_python_interpreter = '/usr/bin/python2'
 
 " Go to the definition/declaration of the function.
 nnoremap <leader>gg :YcmCompleter GoToDefinitionElseDeclaration<cr>
+
+if executable('ag')
+  " Use Ag over Grep
+  set grepprg=ag\ --nogroup\ --nocolor
+
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+endif
 " ------------------------------------------------------------------------- }}}
 
 " FILE MANAGEMENT {{{ ---------------------------------------------------------
