@@ -138,6 +138,24 @@ endif
 " by the lightline plugin.
 set noshowmode
 
+" right was line-endings, encoding, filetype, percent, line:col
+
+let g:lightline = {
+    \ 'active': {
+    \   'left': [ [ 'mode', 'paste'],
+    \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ],
+    \   'right': [ [ 'lineinfo' ],
+    \              [ 'percent' ],
+    \              [ 'fileformat', 'fileencoding', 'filetype', 'charvaluehex' ] ]
+    \ },
+    \ 'component': {
+    \   'charvaluehex': '0x%B'
+    \ },
+    \ 'component_function': {
+    \   'gitbranch': 'fugitive#head'
+    \ }
+    \ }
+
 " Use a specific path for my wiki.
 let g:vimwiki_list = [{'path':'~/Files/Organisation/source/',
     \ 'path_html':'~/Files/Organisation/build/'}]
