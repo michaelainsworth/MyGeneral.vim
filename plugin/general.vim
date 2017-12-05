@@ -91,6 +91,12 @@ nnoremap <leader>j <c-w><c-j>
 nnoremap <leader>k <c-w><c-k>
 nnoremap <leader>l <c-w><c-l>
 
+" Window resizing (this is an ALT key in urxvt).
+nnoremap j <c-w>+
+nnoremap k <c-w>-
+nnoremap h <c-w><
+nnoremap l <c-w>>
+
 " Quick way to insert one character.
 nnoremap <leader>i i_<esc>r
 nnoremap <leader>a a_<esc>r
@@ -98,6 +104,8 @@ nnoremap <leader>a a_<esc>r
 " Navigate tabes
 nnoremap ]t :tabn<cr>
 nnoremap [t :tabp<cr>
+nnoremap <leader>tn :tabe<cr> 
+nnoremap <leader>te :tabe 
 
 " Navigate quick fix list
 nnoremap ]q :cnext<cr>
