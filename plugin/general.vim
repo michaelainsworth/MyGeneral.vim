@@ -138,12 +138,20 @@ endif
 " by the lightline plugin.
 set noshowmode
 
-" right was line-endings, encoding, filetype, percent, line:col
+function! general#filenameAndBuffer()
+    let l:filename = expand('%:t')
+    if empty(l:filename)
+        let l:filename = '[No Name]'
+    endif
+    let l:bufno = '#' . bufnr('%')
+    return l:bufno . ' ' . l:filename
+endfunction
+
 
 let g:lightline = {
     \ 'active': {
     \   'left': [ [ 'mode', 'paste'],
-    \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ],
+    \             [ 'gitbranch', 'readonly', 'filebuf', 'modified' ] ],
     \   'right': [ [ 'lineinfo' ],
     \              [ 'percent' ],
     \              [ 'fileformat', 'fileencoding', 'filetype', 'charvaluehex' ] ]
@@ -152,6 +160,7 @@ let g:lightline = {
     \   'charvaluehex': '0x%B'
     \ },
     \ 'component_function': {
+    \   'filebuf': 'general#filenameAndBuffer',
     \   'gitbranch': 'fugitive#head'
     \ }
     \ }
