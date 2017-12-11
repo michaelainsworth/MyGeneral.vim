@@ -34,9 +34,6 @@ set tabstop=4
 set softtabstop=4
 set expandtab
 
-" Ruler at 80 characters
-set colorcolumn=80
-
 " ------------------------------------------------------------------------- }}}
 
 " MAPPINGS {{{ ----------------------------------------------------------------
