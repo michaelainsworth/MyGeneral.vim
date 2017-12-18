@@ -98,9 +98,42 @@ nnoremap l <c-w>>
 nnoremap <leader>i i_<esc>r
 nnoremap <leader>a a_<esc>r
 
-" Navigate tabes
-nnoremap ]t :tabn<cr>
-nnoremap [t :tabp<cr>
+" Navigate tabs
+" Note that this works with counts, forwards and backwards.
+function! s:TabChange(direction)
+    let l:i = 0
+    while l:i < v:count1
+        let l:command = 'tabnext'
+        if a:direction == '-' 
+            let l:command = 'tabprev'
+        endif
+
+        execute l:command
+        let l:i += 1
+    endwhile
+endfunction
+
+nnoremap ]t :<c-u>call <SID>TabChange('+')<cr>
+nnoremap [t :<c-u>call <SID>TabChange('-')<cr>
+
+" Move tabs
+" Note that this works with counts, forwards and backwards.
+function! s:TabMove(direction)
+    let l:i = 0
+    while l:i < v:count1
+        let l:command = 'tabmove +1'
+        if a:direction == '-' 
+            let l:command = 'tabmove -1'
+        endif
+
+        execute l:command
+        let l:i += 1
+    endwhile
+endfunction
+
+nnoremap ]T :<c-u>call <SID>TabMove('+')<cr>
+nnoremap [T :<c-u>call <SID>TabMove('-')<cr>
+
 nnoremap <leader>tn :tabe<cr> 
 nnoremap <leader>te :tabe 
 
