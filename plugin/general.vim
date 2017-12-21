@@ -163,8 +163,8 @@ let g:lightline = {
     \ }
 
 " Use a specific path for my wiki.
-let g:vimwiki_list = [{'path':'~/Files/Organisation/source/',
-    \ 'path_html':'~/Files/Organisation/build/'}]
+let g:vimwiki_list = [{'path':'~/Dropbox/Wiki/source/',
+    \ 'path_html':'~/Dropbox/Wiki/build/'}]
 
 " Use control-j to expand snippets.
 let g:UltiSnipsExpandTrigger="<c-j>"
