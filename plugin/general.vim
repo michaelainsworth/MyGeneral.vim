@@ -155,6 +155,9 @@ nnoremap <leader>+ :set paste<cr>"+p:set nopaste<cr>:echo "Pasted"<cr>
 
 " PLUGINS {{{ -----------------------------------------------------------------
 
+" Enable matchit
+packadd! matchit
+
 " Always display the status line, even when there's only
 " one file open.
 set laststatus=2
@@ -168,6 +171,9 @@ endif
 " by the lightline plugin.
 set noshowmode
 
+"Youcompleteme fix
+let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
+
 function! general#filenameAndBuffer()
     let l:filename = expand('%:t')
     if empty(l:filename)
@@ -177,12 +183,17 @@ function! general#filenameAndBuffer()
     return l:bufno . ' ' . l:filename
 endfunction
 
+function! general#LineColumnByte()
+    let l:l = line('.')
+    let l:c = col('.')
+    return l:l . ':' . l:c . ':' . (line2byte(l:l) + l:c - 1 )
+endfunction
 
 let g:lightline = {
     \ 'active': {
     \   'left': [ [ 'mode', 'paste'],
     \             [ 'gitbranch', 'readonly', 'filebuf', 'modified' ] ],
-    \   'right': [ [ 'lineinfo' ],
+    \   'right': [ [ 'mylineinfo' ],
     \              [ 'percent' ],
     \              [ 'fileformat', 'fileencoding', 'filetype', 'charvaluehex' ] ]
     \ },
@@ -191,19 +202,20 @@ let g:lightline = {
     \ },
     \ 'component_function': {
     \   'filebuf': 'general#filenameAndBuffer',
+    \   'mylineinfo': 'general#LineColumnByte',
     \   'gitbranch': 'fugitive#head'
     \ }
     \ }
 
 " Use a specific path for my wiki.
-let g:vimwiki_list = [{'path':'~/Dropbox/Wiki/source/',
-    \ 'path_html':'~/Dropbox/Wiki/build/'}]
+let g:vimwiki_list = [{'path':'~/Dropbox/Wiki/',
+    \ 'ext':'.txt'}]
 
 " Use control-j to expand snippets.
 let g:UltiSnipsExpandTrigger="<c-j>"
 
 " Use python2 for the YCM server.
-let g:ycm_server_python_interpreter = '/usr/bin/python2'
+let g:ycm_server_python_interpreter = '/usr/bin/python'
 
 " Go to the definition/declaration of the function.
 nnoremap <leader>gg :YcmCompleter GoToDefinitionElseDeclaration<cr>
