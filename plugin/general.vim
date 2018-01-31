@@ -190,6 +190,13 @@ function! general#LineColumnByte()
 endfunction
 
 let g:lightline = {
+    \ 'inactive': {
+    \   'left': [ [ 'mode', 'paste'],
+    \             [ 'gitbranch', 'readonly', 'filebuf', 'modified' ] ],
+    \   'right': [ [ 'mylineinfo' ],
+    \              [ 'percent' ],
+    \              [ 'fileformat', 'fileencoding', 'filetype', 'charvaluehex' ] ]
+    \ },
     \ 'active': {
     \   'left': [ [ 'mode', 'paste'],
     \             [ 'gitbranch', 'readonly', 'filebuf', 'modified' ] ],
