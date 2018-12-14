@@ -215,8 +215,7 @@ let g:lightline = {
     \ }
 
 " Use a specific path for my wiki.
-let g:vimwiki_list = [{'path':'~/Dropbox/Wiki/',
-    \ 'ext':'.txt'}]
+let g:vimwiki_list = [{'path':'~/Organisation/source/'}]
 
 " Use control-j to expand snippets.
 let g:UltiSnipsExpandTrigger="<c-j>"
@@ -370,4 +369,41 @@ function! s:GitSquash()
 endfunction
 command! GitSquash :call <SID>GitSquash()
 " ------------------------------------------------------------------------- }}}
+
+" =============================================================================
+" RANGER VIM ENHANCEMENTS
+" =============================================================================
+
+" Choose a file.
+function! s:ChooseFile()
+    let l:file = tempname()
+    let l:command = "!ranger --choosefile=" . shellescape(l:file)
+    silent exec l:command
+    redraw!
+
+    if !filereadable(l:file)
+        return
+    endif
+
+    let l:file = readfile(l:file)
+    if len(l:file) != 1 
+        return
+    endif
+
+    let l:mydir = expand('%:p:h')
+
+    let l:uuid = system('uuidgen')
+    let l:uuid = strpart(l:uuid, 0, strlen(l:uuid) - 1)
+    
+    let l:command = 'cp -a ' . shellescape(l:file[0]) . ' ' . shellescape(l:mydir) . '/' . l:uuid
+    call system(l:command)
+    let l:text = '[[file:' . l:uuid . '|' . fnamemodify(l:file[0], ':p:t') . ']]'
+
+    let l:old = @"
+    let @" = l:text
+    put "
+    let @" = l:old
+endfunction
+
+nnoremap <leader>cf :<c-u>call <SID>ChooseFile()<cr>
 
