@@ -390,14 +390,18 @@ function! s:ChooseFile()
         return
     endif
 
-    let l:mydir = expand('%:p:h')
+    if exists('g:my_vimwiki_blob_directory')
+        let l:mydir = g:my_vimwiki_blob_directory
+    else
+        let l:mydir = expand('%:p:h')
+    endif
 
     let l:uuid = system('uuidgen')
     let l:uuid = strpart(l:uuid, 0, strlen(l:uuid) - 1)
-    
+
     let l:command = 'cp -a ' . shellescape(l:file[0]) . ' ' . shellescape(l:mydir) . '/' . l:uuid
     call system(l:command)
-    let l:text = '[[file:' . l:uuid . '|' . fnamemodify(l:file[0], ':p:t') . ']]'
+    let l:text = '[[file:' . l:mydir . '/' . l:uuid . '|' . fnamemodify(l:file[0], ':p:t') . ']]'
 
     let l:old = @"
     let @" = l:text
@@ -406,4 +410,13 @@ function! s:ChooseFile()
 endfunction
 
 nnoremap <leader>cf :<c-u>call <SID>ChooseFile()<cr>
+
+let g:my_hostname = system('hostname')
+let g:my_hostname = strpart(g:my_hostname, 0, strlen(g:my_hostname) - 1)
+
+if g:my_hostname == 'michael.angus.tech'
+    let g:my_vimwiki_blob_directory = '/home/michael/Organisation/source/blob'
+endif
+
+unlet g:my_hostname
 
