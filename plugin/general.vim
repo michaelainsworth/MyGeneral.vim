@@ -215,8 +215,12 @@ let g:lightline = {
     \ }
 
 " Use a specific path for my wiki.
-let g:vimwiki_list = [{'path':'~/Dropbox/Wiki/',
-    \ 'ext':'.txt'}]
+let global_wiki = [{'path':'~/Files/Wiki/', 'ext':'.txt'}]
+if !exists('g:vimwiki_list')
+    let g:vimwiki_list = global_wiki
+else
+    let g:vimwiki_list += global_wiki
+endif
 
 " Use control-j to expand snippets.
 let g:UltiSnipsExpandTrigger="<c-j>"
@@ -359,6 +363,9 @@ function! s:GitCommit()
 endfunction
 command! GitCommit :call <SID>GitCommit()
 command! Gc :call <SID>GitCommit()
+
+" Disable pandoc "chdir()" behaviour
+let g:pandoc#modules#disabled = ["chdir"]
 
 " Changes files beginning with ^pick to 'squash'.
 function! s:GitSquash()
