@@ -420,3 +420,4 @@ endif
 
 unlet g:my_hostname
 
+let g:pandoc#modules#disabled = ["chdir", "folding"]
