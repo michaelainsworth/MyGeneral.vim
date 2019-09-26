@@ -215,11 +215,10 @@ let g:lightline = {
     \ }
 
 " Use a specific path for my wiki.
-let global_wiki = [{'path':'~/Files/Wiki/', 'ext':'.txt'}]
-if !exists('g:vimwiki_list')
-    let g:vimwiki_list = global_wiki
+if hostname() == "archie"
+    let g:vimwiki_list = [{'path':'~/Files/Wiki/', 'ext':'.txt'}]
 else
-    let g:vimwiki_list += global_wiki
+    let g:vimwiki_list = [{'path':'~/Information/Wiki/'}]
 endif
 
 " Use control-j to expand snippets.
@@ -444,3 +443,4 @@ endif
 
 unlet g:my_hostname
 
+let g:pandoc#modules#disabled = ["chdir", "folding"]
