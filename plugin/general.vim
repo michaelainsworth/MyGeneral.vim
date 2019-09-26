@@ -265,7 +265,7 @@ function! VSplitAndFind(file)
 endfunction
 command! -nargs=1 -complete=file_in_path Vsf :call VSplitAndFind(<f-args>)
 
-function!   QuickFixOpenAll()
+function! QuickFixOpenAll()
     if empty(getqflist())
         return
     endif
@@ -279,6 +279,22 @@ function!   QuickFixOpenAll()
     endfor
 endfunction
 command! QuickFixOpenAll         call QuickFixOpenAll()
+
+function! LocationListOpenAll()
+    let l:ll = getloclist(winnr())
+    if empty(l:ll)
+        return
+    endif
+    let s:prev_val = ""
+    for d in l:ll
+        let s:curr_val = bufname(d.bufnr)
+        if (s:curr_val != s:prev_val)
+            execute "edit " . s:curr_val
+        endif
+        let s:prev_val = s:curr_val
+    endfor
+endfunction
+command! LocationListOpenAll         call LocationListOpenAll()
 
 " This function clears all the writable registers.
 function! ClearRegisters()
