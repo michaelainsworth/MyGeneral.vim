@@ -444,3 +444,17 @@ endif
 unlet g:my_hostname
 
 let g:pandoc#modules#disabled = ["chdir", "folding"]
+
+function! s:GrepTodo()
+    let l:old_reg = @"
+    norm 0/todo\|tood\c
+    norm v$hy
+    let l:q = substitute(@", '[^a-zA-Z0-9]', '.', 'g')
+    let @" = l:old_reg
+    tabe
+    let l:q = 'lgrep ' . shellescape(l:q)
+    echom l:q
+    silent! execute l:q
+endfunction
+
+nnoremap <leader>to :call <SID>GrepTodo()<cr>
