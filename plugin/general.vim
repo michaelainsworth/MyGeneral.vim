@@ -458,3 +458,6 @@ function! s:GrepTodo()
 endfunction
 
 nnoremap <leader>to :call <SID>GrepTodo()<cr>
+
+let &printoptions = 'syntax:a,number:y,wrap:y,duplex:long,portrait:n,paper:A4'
+
