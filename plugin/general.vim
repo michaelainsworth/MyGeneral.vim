@@ -447,13 +447,15 @@ let g:pandoc#modules#disabled = ["chdir", "folding"]
 
 function! s:GrepTodo()
     let l:old_reg = @"
-    norm 0/todo\|tood\c
+    norm O 
+    norm /todo\|tood\c
     norm v$hy
     let l:q = substitute(@", '[^a-zA-Z0-9]', '.', 'g')
     let @" = l:old_reg
-    tabe
     let l:q = 'lgrep ' . shellescape(l:q)
     echom l:q
+    norm kdd
+    tabe
     silent! execute l:q
 endfunction
 
