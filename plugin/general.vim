@@ -457,6 +457,7 @@ function! s:GrepTodo()
     norm kdd
     tabe
     silent! execute l:q
+    norm 
 endfunction
 
 nnoremap <leader>to :call <SID>GrepTodo()<cr>
