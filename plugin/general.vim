@@ -210,7 +210,7 @@ let g:lightline = {
     \ 'component_function': {
     \   'filebuf': 'general#filenameAndBuffer',
     \   'mylineinfo': 'general#LineColumnByte',
-    \   'gitbranch': 'fugitive#head'
+    \   'gitbranch': 'FugitiveHead'
     \ }
     \ }
 
