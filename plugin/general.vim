@@ -217,6 +217,8 @@ let g:lightline = {
 " Use a specific path for my wiki.
 if hostname() == "archie"
     let g:vimwiki_list = [{'path':'~/Files/Wiki/', 'ext':'.txt'}]
+elseif hostname() == "014129421157"
+    let g:vimwiki_list = [{'path':'/Files/Wiki/', 'ext':'.txt'}]
 else
     let g:vimwiki_list = [{'path':'~/Information/Wiki/'}]
 endif
