@@ -223,6 +223,11 @@ else
     let g:vimwiki_list = [{'path':'~/Information/Wiki/'}]
 endif
 
+if hostname() == "014129421157"
+    nnoremap <silent> <leader>= :w !clip.exe<cr>
+    vnoremap <silent> <leader>= :w !clip.exe<cr>
+endif
+
 " Use control-j to expand snippets.
 let g:UltiSnipsExpandTrigger="<c-j>"
 
