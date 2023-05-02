@@ -67,6 +67,10 @@ nnoremap <leader>bdd :bd!<cr>
 nnoremap <leader>bw :bw<cr>
 nnoremap <leader>bww :bw!<cr>
 
+" Format xml
+vnoremap <leader>xml :!xmllint -format -<cr>
+nnoremap <leader>xml :.!xmllint -format -<cr>
+
 " Open NERDTree.
 nnoremap <leader>f :NERDTree<cr>
 
@@ -219,6 +223,8 @@ if hostname() == "void" || hostname() == "meta"
     let g:vimwiki_list = [{'path':'~/Files/Wiki/', 'ext':'.txt'}]
 elseif hostname() == "014129421157"
     let g:vimwiki_list = [{'path':'/Files/Wiki/', 'ext':'.txt'}]
+elseif hostname() == "AVDHP004DEV-0"
+    let g:vimwiki_list = [{'path':'~/Files/Wiki/', 'ext':'.txt'}]
 else
     let g:vimwiki_list = [{'path':'~/Information/Wiki/'}]
 endif
@@ -232,7 +238,7 @@ endif
 let g:UltiSnipsExpandTrigger="<c-j>"
 
 " Use python2 for the YCM server.
-let g:ycm_server_python_interpreter = '/usr/bin/python'
+let g:ycm_server_python_interpreter = '/usr/bin/python3'
 
 " Go to the definition/declaration of the function.
 nnoremap <leader>gg :YcmCompleter GoToDefinitionElseDeclaration<cr>
